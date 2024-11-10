@@ -7,14 +7,30 @@ function numberToBinaryString(number) {
   return result.padStart(6, "○");
 }
 
+function timeToBinaryString(time) {
+  return (
+    numberToBinaryString(time.getHours()) +
+    ":" +
+    numberToBinaryString(time.getMinutes()) +
+    ":" +
+    numberToBinaryString(time.getSeconds())
+  );
+}
+
+function timeToString(time) {
+  return (
+    String(time.getHours()).padStart(2, "0") +
+    ":" +
+    String(time.getMinutes()).padStart(2, "0") +
+    ":" +
+    String(time.getSeconds()).padStart(2, "0")
+  );
+}
+
 function updateTime() {
   const now = new Date();
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  const seconds = String(now.getSeconds()).padStart(2, "0");
-  document.getElementById("time").textContent = `${numberToBinaryString(
-    hours
-  )}:${numberToBinaryString(minutes)}:${numberToBinaryString(seconds)}`;
+  document.getElementById("bin-time").textContent = timeToBinaryString(now);
+  document.getElementById("deci-time").textContent = timeToString(now);
 }
 
 setInterval(updateTime, 200); // 매 초마다 시간을 업데이트
